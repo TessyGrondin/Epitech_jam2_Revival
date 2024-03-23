@@ -20,4 +20,5 @@ public:
     int locate_animation(std::string ref);
     void load(std::string path, int width_given);
     void set_loop(std::string anime, bool l);
+    int get_frame() {return m_frame;}
 };

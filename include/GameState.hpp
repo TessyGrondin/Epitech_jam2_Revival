@@ -25,5 +25,7 @@ public:
     void loop(sf::RenderWindow&, sf::Event);
     void draw(sf::RenderWindow&);
     void animate();
-    void interact();
+    void interact(sf::RenderWindow& win);
+    void update(int given, int taken);
+    void create_mole_array(sf::Font& font);
 };

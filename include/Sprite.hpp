@@ -21,6 +21,6 @@ public:
     void set_visibility(bool visible) {m_visible = visible;}
     bool collide(Sprite other);
     sf::FloatRect get_global_bound() {return m_sprite.getGlobalBounds();}
-    bool is_cliked();
+    bool is_cliked(sf::RenderWindow& win);
     void set_origin(sf::Vector2f o) {m_sprite.setOrigin(o);}
 };

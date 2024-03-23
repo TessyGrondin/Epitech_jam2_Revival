@@ -32,13 +32,13 @@ bool Sprite::collide(Sprite other)
     return false;
 }
 
-bool Sprite::is_cliked()
+bool Sprite::is_cliked(sf::RenderWindow& win)
 {
     if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
         return false;
-    sf::Vector2i mouse = sf::Mouse::getPosition();
+    sf::Vector2i mouse = sf::Mouse::getPosition(win);
     sf::FloatRect box = get_global_bound();
-    if (box.contains({(float)mouse.x, (float)mouse.y}))
-        return  true;
+    if (box.contains({(float)(mouse.x), (float)(mouse.y)}))
+        return true;
     return false;
 }
