@@ -1,4 +1,5 @@
 #include "../include/Animation.hpp"
+#include "iostream"
 
 Animation::Animation()
 {

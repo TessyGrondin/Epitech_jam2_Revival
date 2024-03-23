@@ -69,13 +69,11 @@ void SpriteSheet::add_animation(std::string new_anim, std::vector<int> frames)
     int exist = locate_animation(new_anim);
     if (new_anim.empty())
         return;
-    if (m_animations.empty()) {
+    if (m_animations.empty() || exist == -1) {
         Animation animation;
         animation.set_name(new_anim);
         animation.set_frames(frames);
         m_animations.push_back(animation);
-    } else if (exist != -1)
+    } else
         m_animations[exist].set_frames(frames);
-    else
-        m_animations.push_back(Animation(new_anim, frames));
 }

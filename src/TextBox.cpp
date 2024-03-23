@@ -1,4 +1,5 @@
 #include "../include/TextBox.hpp"
+#include <iostream>
 
 TextBox::TextBox()
 {
@@ -39,7 +40,7 @@ void TextBox::draw(sf::RenderWindow& win) {
     win.draw(m_text);
 }
 
-void TextBox::setposition(sf::Vector2f vec, sf::Vector2f padding = {0, 0}) {
+void TextBox::setposition(sf::Vector2f vec, sf::Vector2f padding) {
     m_sprite.setPosition(vec);
     vec.x += padding.x;
     vec.y += padding.y;

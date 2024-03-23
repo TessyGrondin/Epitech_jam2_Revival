@@ -22,4 +22,5 @@ public:
     bool collide(Sprite other);
     sf::FloatRect get_global_bound() {return m_sprite.getGlobalBounds();}
     bool is_cliked();
+    void set_origin(sf::Vector2f o) {m_sprite.setOrigin(o);}
 };
