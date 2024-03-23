@@ -77,3 +77,12 @@ void SpriteSheet::add_animation(std::string new_anim, std::vector<int> frames)
     } else
         m_animations[exist].set_frames(frames);
 }
+
+void SpriteSheet::set_loop(std::string anime, bool l)
+{
+    int a = locate_animation(anime);
+
+    if (a == -1)
+        return;
+    m_animations[a].set_loop(l);
+}

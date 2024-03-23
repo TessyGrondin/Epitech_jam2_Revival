@@ -1,0 +1,4 @@
+placement des trous :
+
+entre 0 et (1920 * 3 - 160)
+entre 0 et (1080 * 3 - 160)

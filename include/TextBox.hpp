@@ -18,4 +18,5 @@ public:
     void load(std::string str, sf::Font&, std::string path);
     sf::Text get_text() {return m_text;}
     void set_character_size(int size) {m_text.setCharacterSize(size);}
+    void set_color(sf::Color c) {m_text.setFillColor(c);}
 };

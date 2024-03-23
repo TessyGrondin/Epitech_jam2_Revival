@@ -10,14 +10,16 @@ m_rigor_display("00", font, ""),
 m_excellency_display("00", font, ""),
 m_courage_display("00", font, "")
 {
+    std::shared_ptr<Hole> shared = std::make_shared<Hole>(font);
+    m_holes.push_back(shared);
     srand(std::time(0));
-    m_rigor_count = rand() % (61 + 1);
-    m_excellency_count = rand() % (61 - m_rigor_count + 1);
+    m_rigor_count = rand() % (60);
+    m_excellency_count = rand() % (60 - m_rigor_count);
     m_courage_count = 60 - m_rigor_count - m_excellency_count;
     m_rigor_display.set_string(std::to_string(m_rigor_count));
     m_excellency_display.set_string(std::to_string(m_excellency_count));
     m_courage_display.set_string(std::to_string(m_courage_count));
-    m_player.set_position({500, 500});
+    m_player.set_position({1920 / 2, 1080 / 2});
     m_rigor_droplet.set_scale({3, 3});
     m_excellency_droplet.set_scale({3, 3});
     m_courage_droplet.set_scale({3, 3});
@@ -34,31 +36,48 @@ m_courage_display("00", font, "")
     m_player.set_scale({4, 4});
 }
 
+void GameState::interact()
+{
+    for (size_t i = 0; i < m_holes.size(); i++) {
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_player.collide(m_holes[i]->get_hole())) {
+            m_holes[i]->break_ground();
+            m_holes[i]->set_visible(true);
+        }
+    }
+}
+
 void GameState::animate()
 {
     std::vector<std::string> anim = {"", "up", "down", "side"};
-    int current = 0;
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        current = 1;
+        m_anim = 1;
+        for (size_t i = 0; i < m_holes.size(); i++)
+            m_holes[i]->move(0, 1);
         m_background.move(0, 1);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        current = 2;
+        m_anim = 2;
+        for (size_t i = 0; i < m_holes.size(); i++)
+            m_holes[i]->move(0, -1);
         m_background.move(0, -1);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         m_player.set_scale({4, 4});
-        current = 3;
+        m_anim = 3;
+        for (size_t i = 0; i < m_holes.size(); i++)
+            m_holes[i]->move(1, 0);
         m_background.move(1, 0);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         m_player.set_scale({-4, 4});
-        current = 3;
+        m_anim = 3;
+        for (size_t i = 0; i < m_holes.size(); i++)
+            m_holes[i]->move(-1, 0);
         m_background.move(-1, 0);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         m_player.play_animation("hit");
-    m_player.play_animation(anim[current]);
+    m_player.play_animation(anim[m_anim]);
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -70,6 +89,8 @@ void GameState::draw(sf::RenderWindow& win)
     m_rigor_droplet.draw(win);
     m_excellency_droplet.draw(win);
     m_courage_droplet.draw(win);
+    for (size_t i = 0; i < m_holes.size(); i++)
+        m_holes[i]->draw(win);
     m_player.draw(win);
 }
 
@@ -82,6 +103,7 @@ void GameState::loop(sf::RenderWindow& win, sf::Event evt)
         win.clear(sf::Color::Blue);
         draw(win);
         animate();
+        interact();
         m_player.play_animation("idle");
         win.display();
     }

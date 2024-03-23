@@ -13,6 +13,7 @@ SRC = 	main.cpp\
 		src/SpriteSheet.cpp\
 		src/TextBox.cpp\
 		src/GameState.cpp\
+		src/Hole.cpp\
 
 NAME = one-for-one
 
