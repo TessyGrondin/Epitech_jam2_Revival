@@ -19,4 +19,5 @@ public:
     sf::Text get_text() {return m_text;}
     void set_character_size(int size) {m_text.setCharacterSize(size);}
     void set_color(sf::Color c) {m_text.setFillColor(c);}
+    void set_drawable(bool b) {m_drawable = b;}
 };

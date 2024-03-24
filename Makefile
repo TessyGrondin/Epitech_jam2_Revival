@@ -16,6 +16,7 @@ SRC = 	main.cpp\
 		src/Hole.cpp\
 		src/End.cpp\
 		src/Menu.cpp\
+		src/Dialogue.cpp\
 
 NAME = one-for-one
 

@@ -9,9 +9,10 @@ int main(void)
     font.loadFromFile("assets/SummerPixel22Regular.ttf");
     Menu menu(font);
     menu.loop(win, evt);
+    Dialogue dial(font);
+    dial.loop(win, evt);
     GameState game(font);
     End res(game.loop(win, evt), font);
-    // End res(true, font);
     res.loop(win, evt);
     return 0;
 }

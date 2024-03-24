@@ -1,10 +1,10 @@
 #pragma once
 #include "Engine.hpp"
 
-class End
+class Dialogue
 {
 private:
-    SpriteSheet                 m_sp;
+    Sprite                 m_sp;
     sf::Clock                   m_clock;
     TextBox                     m_box;
     TextBox                     m_name;
@@ -13,8 +13,8 @@ private:
     Sprite                      m_en;
     int                         m_position = 0;
 public:
-    End(bool state, sf::Font& font);
-    ~End() = default;
+    Dialogue(sf::Font& font);
+    ~Dialogue() = default;
     void loop(sf::RenderWindow& win, sf::Event& evt);
     void load(std::string);
     void update_dialogue();

@@ -1,7 +1,7 @@
-#include "End.hpp"
+#include "Dialogue.hpp"
 
-End::End(bool state, sf::Font& font) :
-m_sp("assets/end.png", 1920),
+Dialogue::Dialogue(sf::Font& font) :
+m_sp("assets/background.png"),
 m_box("", font, "assets/button.png"),
 m_name("", font, "assets/button.png"),
 m_op("assets/Op.png"),
@@ -15,15 +15,10 @@ m_en("assets/En.png")
     m_name.setposition({30, 786}, {20, 10});
     m_op.set_position({-30, 400});
     m_en.set_position({1450, 400});
-    if (!state) {
-        m_sp.setTextureRect({1920, 0, 1920, 1080});
-        load("config/dialogue_3.txt");
-    } else {
-        load("config/dialogue_2.txt");
-    }
+    load("config/dialogue_1.txt");
 }
 
-void End::load(std::string str) {
+void Dialogue::load(std::string str) {
     std::fstream source_file;
     std::string line;
     source_file.open(str);
@@ -36,26 +31,26 @@ void End::load(std::string str) {
     source_file.close();
 }
 
-void End::update_dialogue()
+void Dialogue::update_dialogue()
 {
     m_position++;
     int pos = m_position - 1;
     if (pos >= (int)m_src.size())
         return;
-    m_name.set_visibility(true);
+    m_name.set_drawable(true);
     std::string line = m_src[pos];
     int i = line.find(';');
     m_name.set_string(line.substr(0, i));
     m_box.set_string(line.substr(i + 1));
     if (m_name.get_string() == "")
-        m_name.set_visibility(false);
+        m_name.set_drawable(false);
     if (m_name.get_string() == "Op")
         m_name.setposition({150, 786}, {20, 10});
     else
         m_name.setposition({1500, 786}, {20, 10});
 }
 
-void End::loop(sf::RenderWindow& win, sf::Event& evt)
+void Dialogue::loop(sf::RenderWindow& win, sf::Event& evt)
 {
     int size = m_src.size();
     update_dialogue();
@@ -63,7 +58,7 @@ void End::loop(sf::RenderWindow& win, sf::Event& evt)
         while (win.pollEvent(evt))
             if (evt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 win.close();
-        if (m_clock.getElapsedTime().asSeconds() >= 2.5) {
+        if (m_clock.getElapsedTime().asSeconds() >= 3) {
             update_dialogue();
             m_clock.restart();
         }

@@ -16,7 +16,8 @@ Sprite::Sprite(std::string path)
 
 void Sprite::draw(sf::RenderWindow& win)
 {
-    win.draw(m_sprite);
+    if (m_visible)
+        win.draw(m_sprite);
 }
 
 void Sprite::set_texture(std::string path)

@@ -1,6 +1,6 @@
 Op;En, do you have a moment ?
 Op;Some marmot spirits broke into the energy storings, if no one catches them the portal to the mortal world can't stay open.
-OP;Will you do that for me ? Pleaaase ?
+Op;Will you do that for me ? Pleaaase ?
 En;...
 En;Fine. How many do you need ?
 Op;20 each, use those to traid with the marmots.

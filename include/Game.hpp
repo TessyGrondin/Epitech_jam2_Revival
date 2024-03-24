@@ -3,3 +3,4 @@
 #include "GameState.hpp"
 #include "End.hpp"
 #include "Menu.hpp"
+#include "Dialogue.hpp"
