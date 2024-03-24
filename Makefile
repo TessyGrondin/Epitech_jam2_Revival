@@ -14,6 +14,7 @@ SRC = 	main.cpp\
 		src/TextBox.cpp\
 		src/GameState.cpp\
 		src/Hole.cpp\
+		src/End.cpp\
 
 NAME = one-for-one
 
