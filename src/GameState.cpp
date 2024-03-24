@@ -57,9 +57,11 @@ void GameState::create_mole_array(sf::Font& font)
     }
 }
 
-void GameState::update(int given, int taken)
+bool GameState::update(int given, int taken)
 {
     std::vector<int> sp = {m_rigor_count, m_excellency_count, m_courage_count};
+    if (sp[given] <= 0 || sp[taken] >= 99)
+        return false;
     sp[given]--;
     sp[taken]++;
     m_rigor_display.set_string(std::to_string(sp[0]));
@@ -68,6 +70,7 @@ void GameState::update(int given, int taken)
     m_rigor_count = stoi(m_rigor_display.get_string());
     m_excellency_count = stoi(m_excellency_display.get_string());
     m_courage_count = stoi(m_courage_display.get_string());
+    return true;
 }
 
 void GameState::interact(sf::RenderWindow& win)
@@ -79,8 +82,8 @@ void GameState::interact(sf::RenderWindow& win)
             m_holes[i]->set_visible(true);
         }
         if (m_holes[i]->get_visible() && m_holes[i]->get_state() && m_holes[i]->is_click(win) != -1) {
-            update(m_holes[i]->is_click(win), m_holes[i]->get_color());
-            m_holes[i]->set_visible(false);
+            if (update(m_holes[i]->is_click(win), m_holes[i]->get_color()))
+                m_holes[i]->set_visible(false);
         }
     }
 }
@@ -123,27 +126,40 @@ void GameState::animate()
 void GameState::draw(sf::RenderWindow& win)
 {
     m_background.draw(win);
+    for (size_t i = 0; i < m_holes.size(); i++)
+        m_holes[i]->draw(win);
     m_rigor_display.draw(win);
     m_excellency_display.draw(win);
     m_courage_display.draw(win);
     m_rigor_droplet.draw(win);
     m_excellency_droplet.draw(win);
     m_courage_droplet.draw(win);
-    for (size_t i = 0; i < m_holes.size(); i++)
-        m_holes[i]->draw(win);
     m_player.draw(win);
 }
 
-void GameState::loop(sf::RenderWindow& win, sf::Event evt)
+bool GameState::lose_condition()
+{
+    for (size_t i = 0; i < m_holes.size(); i++)
+        if (!m_holes[i]->get_state() || (m_holes[i]->get_state() && m_holes[i]->get_visible()))
+            return false;
+    return true;
+}
+
+bool GameState::loop(sf::RenderWindow& win, sf::Event evt)
 {
     while (win.isOpen()) {
         while (win.pollEvent(evt))
             if (evt.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                 win.close();
+        if (m_courage_count == m_excellency_count && m_courage_count == m_rigor_count)
+            return true;
+        if (lose_condition())
+            return false;
         win.clear(sf::Color::Blue);
         draw(win);
         animate();
         interact(win);
         win.display();
     }
+    return false;
 }

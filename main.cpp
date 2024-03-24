@@ -9,6 +9,10 @@ int main(void)
     font.loadFromFile("assets/SummerPixel22Regular.ttf");
     GameState game(font);
 
-    game.loop(win, evt);
+    bool res = game.loop(win, evt);
+    if (res)
+        std::cout << "I win" << std::endl;
+    else
+        std::cout << "I lost" << std::endl;
     return 0;
 }

@@ -1,4 +1,24 @@
-placement des trous :
-
-entre 0 et (1920 * 3 - 160)
-entre 0 et (1080 * 3 - 160)
+ordre de priorité :
+end screen
+    faire renvoyer un bool à gamestate pour savoir si j'ai gagné ou perdu
+    faire une asset "end.png" comportant les 2 fins (win first, lose sec)
+    set_texture rect de end.png en fonction du bool en paramètre
+    affichage pendant 5s
+map_collisions
+    si position du bg.x == 1920 / 2 gauche = impossible
+    si position du bg.y == 1080 / 2 up = impossible
+    si position du bg.x == 1920 / 2 + 1920 * 3 = droite impossible
+    si position du bg.y == 1080 / 2 + 1080 * 3 = bas impossible
+menu
+    asset menu
+    boutons
+        démarrer
+        quitter
+dialogues
+    après avoir appuyer sur démarrer
+    une textbox
+    un array de string
+    un sprite/spritesheet
+    mise en context
+    win dialogue
+    lose dialogue

@@ -22,10 +22,11 @@ private:
 public:
     GameState(sf::Font& font);
     ~GameState() = default;
-    void loop(sf::RenderWindow&, sf::Event);
+    bool loop(sf::RenderWindow&, sf::Event);
     void draw(sf::RenderWindow&);
     void animate();
     void interact(sf::RenderWindow& win);
-    void update(int given, int taken);
+    bool update(int given, int taken);
     void create_mole_array(sf::Font& font);
+    bool lose_condition();
 };
