@@ -22,9 +22,19 @@ m_sp("assets/menu.png", 1920), m_start_text("", font, "assets/button.png"), m_qu
 
 int Menu::button_pressed(sf::Event& evt, sf::Mouse::Button button, sf::RenderWindow& win)
 {
+    if (evt.mouseMove.x >= m_start_text.get_position().x && evt.mouseMove.y >= m_start_text.get_position().y
+    && evt.mouseMove.x <= m_start_text.get_position().x + 128 && evt.mouseMove.y <= m_start_text.get_position().y + 32)
+        m_start_text.set_color(sf::Color::Red);
+    else
+        m_start_text.set_color(sf::Color::Black);
+    if (evt.mouseMove.x >= m_quit_text.get_position().x && evt.mouseMove.y >= m_quit_text.get_position().y
+    && evt.mouseMove.x <= m_quit_text.get_position().x + 128 && evt.mouseMove.y <= m_quit_text.get_position().y + 32)
+        m_quit_text.set_color(sf::Color::Red);
+    else
+        m_quit_text.set_color(sf::Color::Black);
+
     if (evt.type == sf::Event::MouseButtonPressed && evt.mouseButton.button == button) {
         if (m_start_text.is_cliked(win)) {
-            m_start_text.set_color(sf::Color::Red);
             m_start_text.set_scale({1.6, 1.6});
             m_start_text.draw(win);
             win.display();
@@ -32,7 +42,6 @@ int Menu::button_pressed(sf::Event& evt, sf::Mouse::Button button, sf::RenderWin
             return 1;
         }
         if (m_quit_text.is_cliked(win)) {
-            m_quit_text.set_color(sf::Color::Red);
             m_quit_text.set_scale({1.6, 1.6});
             m_quit_text.draw(win);
             win.display();

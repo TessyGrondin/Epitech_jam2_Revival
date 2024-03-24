@@ -3,6 +3,6 @@ Op;Some marmot spirits broke into the energy storings, if no one catches them th
 Op;Will you do that for me ? Pleaaase ?
 En;...
 En;Fine. How many do you need ?
-Op;20 each, use those to traid with the marmots.
+Op;20 each, use those to trade with the marmots.
 ;You obtained power droplets.
 Op;Good luck !
