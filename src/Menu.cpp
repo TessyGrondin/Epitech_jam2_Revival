@@ -23,13 +23,26 @@ m_sp("assets/menu.png", 1920), m_start_text("", font, "assets/button.png"), m_qu
 int Menu::button_pressed(sf::Event& evt, sf::Mouse::Button button, sf::RenderWindow& win)
 {
     if (evt.type == sf::Event::MouseButtonPressed && evt.mouseButton.button == button) {
-        if (m_start_text.is_cliked(win))
+        if (m_start_text.is_cliked(win)) {
+            m_start_text.set_color(sf::Color::Red);
+            m_start_text.set_scale({1.6, 1.6});
+            m_start_text.draw(win);
+            win.display();
+            sf::sleep(sf::milliseconds(500));
             return 1;
-        if (m_quit_text.is_cliked(win))
+        }
+        if (m_quit_text.is_cliked(win)) {
+            m_quit_text.set_color(sf::Color::Red);
+            m_quit_text.set_scale({1.6, 1.6});
+            m_quit_text.draw(win);
+            win.display();
+            sf::sleep(sf::milliseconds(500));
             return 2;
+        }
     }
     return 0;
 }
+
 
 void Menu::loop(sf::RenderWindow& win, sf::Event& evt)
 {
