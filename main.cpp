@@ -8,7 +8,8 @@ int main(void)
     win.create(sf::VideoMode(1920, 1080), "One for one");
     font.loadFromFile("assets/SummerPixel22Regular.ttf");
     GameState game(font);
-    End res(game.loop(win, evt));
+    End res(game.loop(win, evt), font);
+    // End res(true, font);
     res.loop(win, evt);
     return 0;
 }

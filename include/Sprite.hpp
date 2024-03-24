@@ -23,4 +23,5 @@ public:
     sf::FloatRect get_global_bound() {return m_sprite.getGlobalBounds();}
     bool is_cliked(sf::RenderWindow& win);
     void set_origin(sf::Vector2f o) {m_sprite.setOrigin(o);}
+    void setTextureRect(const sf::IntRect rect) {m_sprite.setTextureRect({rect.left, rect.top, rect.width, rect.height});}
 };

@@ -14,7 +14,6 @@ public:
     SpriteSheet();
     SpriteSheet(std::string path, int width_given);
     ~SpriteSheet() = default;
-    void setTextureRect(const sf::IntRect rect) {m_sprite.setTextureRect( {rect.left, rect.top, rect.width, rect.height}); }
     void add_animation(std::string, std::vector<int>);
     void play_animation(std::string anim);
     int locate_animation(std::string ref);
