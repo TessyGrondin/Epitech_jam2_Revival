@@ -92,26 +92,26 @@ void GameState::animate()
 {
     std::vector<std::string> anim = {"idle", "up", "down", "side"};
     m_anim = 0;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && m_player.get_position().y > m_background.get_position().y) {
         m_anim = 1;
         for (size_t i = 0; i < m_holes.size(); i++)
             m_holes[i]->move(0, 1);
         m_background.move(0, 1);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && m_player.get_position().y < (m_background.get_position().y + m_background.get_global_bound().height - 64)) {
         m_anim = 2;
         for (size_t i = 0; i < m_holes.size(); i++)
             m_holes[i]->move(0, -1);
         m_background.move(0, -1);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && m_player.get_position().x > m_background.get_position().x + 32) {
         m_player.set_scale({4, 4});
         m_anim = 3;
         for (size_t i = 0; i < m_holes.size(); i++)
             m_holes[i]->move(1, 0);
         m_background.move(1, 0);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && m_player.get_position().x < (m_background.get_position().x + m_background.get_global_bound().width - 32)) {
         m_player.set_scale({-4, 4});
         m_anim = 3;
         for (size_t i = 0; i < m_holes.size(); i++)
